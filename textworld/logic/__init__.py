@@ -1729,7 +1729,10 @@ class State:
 
         pred = rule.preconditions[depth]
 
-        types = [self._logic.types.get(t) for t in pred.signature.types]
+        # workaround to avoid missing types - a.k.a. missing "oven" issues
+        #types = [self._logic.types.get(t) for t in pred.signature.types]
+        types = [self._logic.types.get(t) for t in pred.signature.types
+                 if t in self._logic.types]
         for subtypes in self._logic.types.multi_subtypes(types):
             signature = Signature(pred.signature.name, [t.name for t in subtypes])
             for prop in self.facts_with_signature(signature):
