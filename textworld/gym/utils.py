@@ -142,7 +142,8 @@ def make_batch(env_id: str, batch_size: int, parallel: bool = False) -> str:
         id=batch_env_id,
         entry_point=entry_point,
         max_episode_steps=env_spec.max_episode_steps,
-        max_episode_seconds=env_spec.max_episode_seconds,
+        # Disabled as causing AttributeError of no attribute 'max_episode_seconds'
+        #max_episode_seconds=env_spec.max_episode_seconds,
         nondeterministic=env_spec.nondeterministic,
         reward_threshold=env_spec.reward_threshold,
         trials=env_spec.trials,
